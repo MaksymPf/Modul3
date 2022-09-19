@@ -11,22 +11,21 @@ def play():
     level = 1
     enemy_obj = models.Enemy(level)
     
-    try:
-        while 2:
+    while True:
+        try:
             user_obj.attack(enemy_obj)
             user_obj.defence(enemy_obj)
             print('Your lives:', user_obj.lives)
             print('Enemy lives:', enemy_obj.lives)
-    except game_exceptions.EnemyDown:
-        level += 1
+        except game_exceptions.EnemyDown:
+            print('Enemy Down')
+            level += 1
+            enemy_obj = models.Enemy(level)
 
 
 if __name__ == '__main__':
-
     try:
         play()
-    # except game_exceptions.EnemyDown as err1:
-    #     print(err1)
     except game_exceptions.GameOver as err:
         print(err)
     except KeyboardInterrupt:
