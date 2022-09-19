@@ -54,13 +54,12 @@ class Player:
     def decrease_lives(self):
         self.lives -= 1
         if self.lives == 0:
-            raise game_exceptions.GameOver('Game Over')
+            raise game_exceptions.GameOver(self.name, self.score)
     
     def attack(self, enemy_obj):
         attack = int(input('Input number 1, 2, 3: '))
-        # enemy_obj = Enemy(self)                                           ###
-        enemy_attack = enemy_obj.select_attack()                          ###
-        res_fight = Player.fight(attack, enemy_attack)                    ###
+        enemy_attack = enemy_obj.select_attack()
+        res_fight = Player.fight(attack, enemy_attack)
         print('\nYou attak with:', attack, 'enemy defence with:', enemy_obj)
         print('Result of fight:', res_fight)
 
@@ -86,32 +85,3 @@ class Player:
             print('You missed!')
         if res_fight == -1:
             print('You defended successfully!')
-
-
-if __name__ == '__main__':
-
-    # first_enemy = Enemy(int(input('input numb: ')))
-    # print('\nEnemy lives:', first_enemy.lives)
-    # print('Enemy level:', first_enemy.level)
-    # input()
-    # first_enemy.decrease_lives()
-    # print('\nEnemy lives:', first_enemy.lives)
-    # print('Enemy level:', first_enemy.level)
-    # input()
-
-    while True:
-        try:
-            first_enemy = Enemy(int(input('input numb: ')))
-            print('\nEnemy lives:', first_enemy.lives)
-            print('Enemy level:', first_enemy.level)
-            input()
-            first_enemy.decrease_lives()
-        except game_exceptions.EnemyDown as error:
-            print(error)
-        else:
-            print('\nEnemy lives:', first_enemy.lives)
-            print('Enemy level:', first_enemy.level)
-            input()
-        finally:
-            print('__________________')
-            input()
